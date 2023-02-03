@@ -154,8 +154,9 @@ void setup_files(){
 
 void write_to_SD(){ 
   while (1){
-    if (analogRead(A0) > SIGNAL_THRESHOLD){
-      int adc = analogRead(A0);
+    int adc_fake = (rand()%1023);
+    if (/*analogRead(A0)*/ adc_fake > SIGNAL_THRESHOLD){
+      int adc = adc_fake/*analogRead(A0)*/;
       
       if (MASTER == 1) {digitalWrite(6, HIGH);
           count++;
@@ -195,7 +196,7 @@ void write_to_SD(){
               
       keep_pulse = 0;
       digitalWrite(3, LOW);
-      while(analogRead(A0) > RESET_THRESHOLD){continue;}
+      while(/*analogRead(A0)*/ adc_fake > RESET_THRESHOLD){continue;}
       
       total_deadtime += (micros() - measurement_t1) / 1000.;}
     }
